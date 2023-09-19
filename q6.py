@@ -27,29 +27,37 @@ while True:
     elif ch in (2,3):
         acno = int(input('''
         Account No.: '''))
-        if ch == 2:
-            amt = int(input('''
-        Deposit: '''))
-            df.loc[acno,'bal'] += amt
-            print(f'''
-        Balance: {df.loc[acno,'bal']}''')
-        elif ch == 3:
-            amt = int(input('''
-        Withdraw: '''))
-            df.loc[acno,'bal'] -= amt
-            print(f'''
-        Balance: {df.loc[acno,'bal']}''')
-        df.to_csv('accountdata.csv')
+        if acno in df.index:
+            if ch == 2:
+                amt = int(input('''
+            Deposit: '''))
+                df.loc[acno,'bal'] += amt
+                print(f'''
+            Balance: {df.loc[acno,'bal']}''')
+            elif ch == 3:
+                amt = int(input('''
+            Withdraw: '''))
+                df.loc[acno,'bal'] -= amt
+                print(f'''
+            Balance: {df.loc[acno,'bal']}''')
+            df.to_csv('accountdata.csv')
+        else:
+            print('''
+            Please enter a valid Account No.''')
 
     elif ch == 4:
         acno = int(input('''
         Account No.: '''))
-        print(f'''
-        Balance: {df.loc[acno,'bal']}''')
+        if acno in df.index:
+            print(f'''
+            Balance: {df.loc[acno,'bal']}''')
+        else:
+            print('''
+            Please enter a valid Account No.''')
     elif ch == 5:
         print('''
-        Thank You''')
+            Thank You''')
         break
     else:
         print('''
-        Please enter a valid option''')
+            Please enter a valid option''')
